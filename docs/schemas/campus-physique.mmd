@@ -1,0 +1,20 @@
+graph LR
+  subgraph LOCA [Technical room A, building A]
+    CCA[CC-A]
+    UPSA[UPS A]
+  end
+
+  subgraph LOCB [Technical room B, building B]
+    CCB[CC-B]
+    UPSB[UPS B]
+  end
+
+  CH{{Cable chamber under the courtyard - ASSUMPTION}}
+
+  UPSA --- CCA
+  UPSB --- CCB
+
+  CCA ---|Route 1: north technical gallery| CH
+  CH ---|Route 1| CCB
+
+  CCA -.->|Route 2: south outer facade| CCB
