@@ -18,6 +18,12 @@ for (n1, a), (n2, b) in itertools.combinations(nets, 2):
     if a.overlaps(b):
         errors.append(f'Overlap: {n1} {a} / {n2} {b}')
 
+nets6 = [(v['name'], ipaddress.ip_network(v['ipv6'])) for v in vlans if v.get('ipv6')]
+
+for (n1, a), (n2, b) in itertools.combinations(nets6, 2):
+    if a.overlaps(b):
+        errors.append(f'IPv6 overlap: {n1} {a} / {n2} {b}')
+
 for e in errors:
     print(e)
 
