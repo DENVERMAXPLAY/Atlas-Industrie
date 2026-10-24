@@ -57,10 +57,13 @@ MAD excl. tax. TCO = CAPEX + 5 x (10 % of CAPEX + devices x 1.5 d x 5,400).
   99.9999 % each, but the non-redundant access switch (99.9 %) caps the
   chain near 99.90 %. Power supplies, fibre routes and failover mechanisms
   remain to be analysed.
-- **Common causes.** Both fibres meet at <junction point>; the cores are
-  fed by <UPS situation>; identical software on both sides means one bug
-  hits both. Failures are not independent, so the theoretical figure
-  overstates.
+- **Common causes.** In our assumed cabling plan the two fibre routes share no
+  junction point (Route 1 via the cable chamber under the courtyard, Route 2
+  via the south outer facade), but this is unproven without a site survey. The
+  cores are fed by separate UPS (UPS A and UPS B), also an assumption. Both
+  fibres still terminate in the same two technical rooms, and identical
+  software on both cores means one bug hits both. Failures are not
+  independent, so the theoretical figure overstates.
 - **Firewall HA across buildings:** a cut inter-building link can cause
   split brain. A dedicated sync path is needed.
 - **Collapsed core:** capacity limited by the 10/25G cores.
