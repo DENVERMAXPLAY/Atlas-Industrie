@@ -1,1 +1,33 @@
-Architecture
+graph TB
+  INET((Internet et FAI))
+
+  subgraph SA ["Bâtiment A, siège et IT"]
+    FWA[FW-A]
+    CCA[CC-A]
+    SRV["Serveurs IT (VLAN 25)"]
+    ACCA["ACC-A-01 à ACC-A-06<br/>Accès bureautique, voix, Wi-Fi A"]
+  end
+
+  subgraph SB ["Bâtiment B, production"]
+    FWB[FW-B]
+    CCB[CC-B]
+    SUP["Supervision de production (VLAN 51)"]
+    ACCOT["ACC-B-01, ACC-B-02<br/>Accès industriel OT"]
+    ACCBB["ACC-B-03, ACC-B-04<br/>Accès bureautique B"]
+  end
+
+  INET --- FWA
+  FWA --- CCA
+  SRV --- CCA
+  ACCA --- CCA
+  ACCA -.- CCB
+
+  CCA ===|2 fibres, routes distinctes| CCB
+  FWA === FWB
+
+  FWB --- CCB
+  SUP --- ACCOT
+  ACCOT --- CCB
+  ACCOT -.- CCA
+  ACCBB --- CCB
+  ACCBB -.- CCA
