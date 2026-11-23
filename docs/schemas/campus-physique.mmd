@@ -11,10 +11,10 @@ graph LR
 
   CH{{Cable chamber under the courtyard - ASSUMPTION}}
 
-  UPSA --- CCA
-  UPSB --- CCB
+  UPSA ---|separate UPS| CCA
+  UPSB ---|separate UPS| CCB
 
   CCA ---|Route 1: north technical gallery| CH
+  CCA -.-|Route 2: south outer facade| CH
   CH ---|Route 1| CCB
-
-  CCA -.->|Route 2: south outer facade| CCB
+  CH -.-|Route 2| CCB
