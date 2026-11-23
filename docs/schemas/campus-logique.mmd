@@ -1,33 +1,49 @@
 graph TB
-  INET((Internet et FAI))
-
-  subgraph SA ["Bâtiment A, siège et IT"]
-    FWA[FW-A]
-    CCA[CC-A]
-    SRV["Serveurs IT (VLAN 25)"]
-    ACCA["ACC-A-01 à ACC-A-06<br/>Accès bureautique, voix, Wi-Fi A"]
+  INET((Internet and ISP))
+  subgraph BatA [Building A, head office and IT]
+    FW_A[FW-A]
+    CC_A[CC-A]
+    ACC_A_01[ACC-A-01]
+    ACC_A_02[ACC-A-02]
+    ACC_A_03[ACC-A-03]
+    ACC_A_04[ACC-A-04]
+    ACC_A_05[ACC-A-05]
+    ACC_A_06[ACC-A-06]
+    SRVA[IT servers]
   end
-
-  subgraph SB ["Bâtiment B, production"]
-    FWB[FW-B]
-    CCB[CC-B]
-    SUP["Supervision de production (VLAN 51)"]
-    ACCOT["ACC-B-01, ACC-B-02<br/>Accès industriel OT"]
-    ACCBB["ACC-B-03, ACC-B-04<br/>Accès bureautique B"]
+  subgraph BatB [Building B, production]
+    FW_B[FW-B]
+    CC_B[CC-B]
+    ACC_B_01[ACC-B-01]
+    ACC_B_02[ACC-B-02]
+    ACC_B_03[ACC-B-03]
+    ACC_B_04[ACC-B-04]
+    SCADA[Production supervision]
   end
-
-  INET --- FWA
-  FWA --- CCA
-  SRV --- CCA
-  ACCA --- CCA
-  ACCA -.- CCB
-
-  CCA ===|2 fibres, routes distinctes| CCB
-  FWA === FWB
-
-  FWB --- CCB
-  SUP --- ACCOT
-  ACCOT --- CCB
-  ACCOT -.- CCA
-  ACCBB --- CCB
-  ACCBB -.- CCA
+  INET --- FW_A
+  FW_A --- CC_A
+  FW_B --- CC_B
+  FW_A === FW_B
+  CC_A === CC_B
+  SRVA --- CC_A
+  ACC_A_01 --- CC_A
+  ACC_A_02 --- CC_A
+  ACC_A_03 --- CC_A
+  ACC_A_04 --- CC_A
+  ACC_A_05 --- CC_A
+  ACC_A_06 --- CC_A
+  ACC_A_01 -.- CC_B
+  ACC_A_02 -.- CC_B
+  ACC_A_03 -.- CC_B
+  ACC_A_04 -.- CC_B
+  ACC_A_05 -.- CC_B
+  ACC_A_06 -.- CC_B
+  ACC_B_01 --- CC_B
+  ACC_B_02 --- CC_B
+  ACC_B_03 --- CC_B
+  ACC_B_04 --- CC_B
+  ACC_B_01 -.- CC_A
+  ACC_B_02 -.- CC_A
+  ACC_B_03 -.- CC_A
+  ACC_B_04 -.- CC_A
+  SCADA --- ACC_B_04
